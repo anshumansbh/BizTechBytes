@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "55530752431",
+    "project_id": "biztech-bytes",
+    "storage_bucket": "biztech-bytes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55530752431:android:c68553ac19171b2565875a",
+        "android_client_info": {
+          "package_name": "com.example.biztechbytes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "55530752431-vfh9enp6jffvsh4cgjrm3f3naedcn83s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.biztechbytes",
+            "certificate_hash": "91b70a2717833528f955b399a4bd253ced1130ff"
+          }
+        },
+        {
+          "client_id": "55530752431-beaflde7q2vo4qqed3ul3gpo7dkbks4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXBrkeLhmKo4mR_EUT2wMOleHBER3xOOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55530752431-beaflde7q2vo4qqed3ul3gpo7dkbks4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
