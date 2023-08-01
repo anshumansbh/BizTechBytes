@@ -10,11 +10,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
@@ -101,18 +104,38 @@ class LoginFragment : Fragment() {
 
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == Activity.RESULT_OK) {
-                var firebaseUser : FirebaseUser? = firebaseAuth?.currentUser
-
-                toggleViewVisibilityListener?.onToggleViewVisibility(true)
-
-            } else {
-                Snackbar.make(btGoogleSignIn, "Login failed", Snackbar.LENGTH_LONG).show()
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                try {
+                    // Google Sign-In was successful, authenticate with Firebase
+                    val account = task.getResult(ApiException::class.java)
+                    firebaseAuthWithGoogle(account)
+                } catch (e: ApiException) {
+                    // Google Sign-In failed, handle the error
+                    Snackbar.make(
+                        btGoogleSignIn,
+                        "Login failed: ${e.message}",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }
 
     fun setOnToggleViewVisibilityListener(listener: OnToggleViewVisibilityListener) {
         toggleViewVisibilityListener = listener
+    }
+
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount?) {
+        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+        firebaseAuth?.signInWithCredential(credential)
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = firebaseAuth?.currentUser
+                    toggleViewVisibilityListener?.onToggleViewVisibility(true)
+                } else {
+                    Snackbar.make(btGoogleSignIn, "Firebase Authentication failed", Snackbar.LENGTH_LONG).show()
+                }
+            }
     }
 
     companion object {
