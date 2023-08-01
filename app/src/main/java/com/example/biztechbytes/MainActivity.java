@@ -3,6 +3,7 @@ package com.example.biztechbytes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -29,15 +30,19 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnT
     DatabaseReference mRef;
     VerticalViewPager verticalViewPager;
 
+    FragmentContainerView fragmentContainerView ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        verticalViewPager = (VerticalViewPager) findViewById(R.id.verticalViewPager);
+        verticalViewPager = findViewById(R.id.verticalViewPager);
 
         mRef = FirebaseDatabase.getInstance().getReference("News");
+
+        fragmentContainerView = findViewById(R.id.fragmentContainerView);
 
 
 
@@ -90,8 +95,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnT
     public void onToggleViewVisibility(boolean isVisible) {
         if (isVisible) {
             verticalViewPager.setVisibility(View.VISIBLE);
+            fragmentContainerView.setVisibility(View.GONE);
+
         } else {
-            verticalViewPager.setVisibility(View.GONE);
+//            verticalViewPager.setVisibility(View.GONE);
+//            fragmentContainerView.setVisibility(View.VISIBLE);
         }
     }
 }

@@ -103,7 +103,7 @@ class LoginFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 var firebaseUser : FirebaseUser? = firebaseAuth?.currentUser
 
-
+                toggleViewVisibilityListener?.onToggleViewVisibility(true)
 
             } else {
                 Snackbar.make(btGoogleSignIn, "Login failed", Snackbar.LENGTH_LONG).show()
