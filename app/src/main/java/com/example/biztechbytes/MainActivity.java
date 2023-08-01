@@ -2,8 +2,10 @@ package com.example.biztechbytes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,7 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoginFragment.OnToggleViewVisibilityListener {
 
     List<SliderItems> sliderItems = new ArrayList<>();
 
@@ -25,15 +27,21 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> heads = new ArrayList<>();
 
     DatabaseReference mRef;
+    VerticalViewPager verticalViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        VerticalViewPager verticalViewPager = (VerticalViewPager) findViewById(R.id.verticalViewPager);
+        verticalViewPager = (VerticalViewPager) findViewById(R.id.verticalViewPager);
 
         mRef = FirebaseDatabase.getInstance().getReference("News");
+
+
+
+        loadFragment();
 
         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -67,5 +75,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void loadFragment(){
+        Fragment fragment = LoginFragment.newInstance();
+        ((LoginFragment) fragment).setOnToggleViewVisibilityListener(MainActivity.this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
+    }
+
+
+
+
+    @Override
+    public void onToggleViewVisibility(boolean isVisible) {
+        if (isVisible) {
+            verticalViewPager.setVisibility(View.VISIBLE);
+        } else {
+            verticalViewPager.setVisibility(View.GONE);
+        }
     }
 }
