@@ -1,13 +1,12 @@
 package com.example.biztechbytes
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -44,14 +43,14 @@ class LoginFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    var firebaseAuth: FirebaseAuth? = null
-    var firebaseDatabase: FirebaseDatabase? = null
+    private var firebaseAuth: FirebaseAuth? = null
+    private var firebaseDatabase: FirebaseDatabase? = null
 
-    var mGoogleSignInClient: GoogleSignInClient? = null
+    private var mGoogleSignInClient: GoogleSignInClient? = null
 
-    val RC_SIGN_IN = 10012
+    private val RC_SIGN_IN = 10012
 
-    lateinit var btGoogleSignIn: Button
+    private lateinit var btGoogleSignIn: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +86,7 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        var view = inflater.inflate(R.layout.fragment_login, container, false)
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
         btGoogleSignIn = view.findViewById(R.id.btGoogleLogin)
         btGoogleSignIn.setOnClickListener { startSignInProcess() }
         return view
@@ -99,6 +98,7 @@ class LoginFragment : Fragment() {
         startActivityForResult(intent, RC_SIGN_IN)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

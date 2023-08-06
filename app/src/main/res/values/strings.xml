@@ -2,4 +2,6 @@
     <string name="app_name">BizTech Bytes</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_with_google">Login with google</string>
+    <string name="business_and_technology_news">Business and Technology News</string>
 </resources>
