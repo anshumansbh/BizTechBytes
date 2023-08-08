@@ -15,7 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 
@@ -76,8 +75,13 @@ class LoginFragment : Fragment() {
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(activity as Activity, gso)
 
-        // Call the callback method to toggle view visibility
-        toggleViewVisibilityListener?.onToggleViewVisibility(false) // Pass your desired visibility status here
+        // Check if the user is already signed in
+        if (firebaseAuth?.currentUser != null) {
+            toggleViewVisibilityListener?.onToggleViewVisibility(true)
+        }else{
+            // Call the callback method to toggle view visibility
+            toggleViewVisibilityListener?.onToggleViewVisibility(false) // Pass your desired visibility status here
+        }
     }
 
     override fun onCreateView(
@@ -94,8 +98,9 @@ class LoginFragment : Fragment() {
 
     private fun startSignInProcess()
     {
-        var intent = mGoogleSignInClient?.signInIntent
+        val intent = mGoogleSignInClient?.signInIntent
         startActivityForResult(intent, RC_SIGN_IN)
+
     }
 
     @Deprecated("Deprecated in Java")
@@ -130,7 +135,7 @@ class LoginFragment : Fragment() {
         firebaseAuth?.signInWithCredential(credential)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val user = firebaseAuth?.currentUser
+//                    val user = firebaseAuth?.currentUser
                     toggleViewVisibilityListener?.onToggleViewVisibility(true)
                 } else {
                     Snackbar.make(btGoogleSignIn, "Firebase Authentication failed", Snackbar.LENGTH_LONG).show()
