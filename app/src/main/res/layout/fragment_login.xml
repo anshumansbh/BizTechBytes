@@ -3,61 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/theme_primary">
+    android:background="@mipmap/green_bg2">
+
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierMargin="@dimen/material_emphasis_high_type"
-        app:cardCornerRadius="30dp"
-        android:layout_margin="30dp"
+        app:cardCornerRadius="165dp"
         android:elevation="10dp"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btGoogleLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#2143C0">
 
         <ImageView
             android:id="@+id/roundedImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/welcome_message"
-            android:background="@color/theme_primary"
+            android:scaleType="centerCrop"
             android:contentDescription="@string/business_and_technology_news" />
-<!--            android:scaleType="centerCrop"-->
-
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/btGoogleLogin"
-        style="@android:style/Widget.Material.Button.Inset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:backgroundTint="@color/theme_secondary"
-
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="15dp"
+        app:cardBackgroundColor="#2143C0"
+        app:layout_constraintTop_toBottomOf="@+id/cvWelcome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvWelcome">
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/google_icon2" />
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="7dp">
 
-        <TextView
-            android:id="@+id/image_button_2_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textSize="26sp"
-            android:textColor="@android:color/white"
-            android:text="@string/login_with_google" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/google_icon_round"
+                android:background="@drawable/circle_background"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:maxWidth="60dp"
+                android:maxHeight="60dp"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/image_button_2_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:text="@string/login_with_google" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
