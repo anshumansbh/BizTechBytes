@@ -8,26 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:55530752431:android:c68553ac19171b2565875a",
+        "mobilesdk_app_id": "1:55530752431:android:e07b9611f3d1807765875a",
         "android_client_info": {
-          "package_name": "com.example.biztechbytes"
+          "package_name": "com.biztechbytes.biztechbytes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "55530752431-pvd10rq2tnnuc6i37o9tlmcs97lpqi6l.apps.googleusercontent.com",
+          "client_id": "55530752431-027re7e13tpgjsb9jhuiq7k43u9vu9vg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.biztechbytes",
-            "certificate_hash": "b011aa142abf90e69231dfa5fd0747c28ca1f2d4"
-          }
-        },
-        {
-          "client_id": "55530752431-vfh9enp6jffvsh4cgjrm3f3naedcn83s.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.biztechbytes",
-            "certificate_hash": "91b70a2717833528f955b399a4bd253ced1130ff"
+            "package_name": "com.biztechbytes.biztechbytes",
+            "certificate_hash": "bc794da29e2d1052f440c05710418416716d8c30"
           }
         },
         {

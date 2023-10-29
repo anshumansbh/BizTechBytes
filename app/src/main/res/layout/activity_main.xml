@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_login"/>
-    <com.example.biztechbytes.VerticalViewPager
+    <com.biztechbytes.biztechbytes.VerticalViewPager
         android:id="@+id/verticalViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
