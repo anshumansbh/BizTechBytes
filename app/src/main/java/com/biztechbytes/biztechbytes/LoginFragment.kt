@@ -14,8 +14,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
+//import com.google.firebase.auth.FirebaseAuth
+//import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var firebaseAuth: FirebaseAuth? = null
+//    private var firebaseAuth: FirebaseAuth? = null
     private var firebaseDatabase: FirebaseDatabase? = null
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
@@ -64,24 +64,25 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        toggleViewVisibilityListener?.onToggleViewVisibility(true)
 
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        firebaseDatabase = FirebaseDatabase.getInstance()
-
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        mGoogleSignInClient = GoogleSignIn.getClient(activity as Activity, gso)
-
-        // Check if the user is already signed in
-        if (firebaseAuth?.currentUser != null) {
-            toggleViewVisibilityListener?.onToggleViewVisibility(true)
-        }else{
-            // Call the callback method to toggle view visibility
-            toggleViewVisibilityListener?.onToggleViewVisibility(false) // Pass your desired visibility status here
-        }
+//        firebaseAuth = FirebaseAuth.getInstance()
+//        firebaseDatabase = FirebaseDatabase.getInstance()
+//
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.default_web_client_id))
+//            .requestEmail()
+//            .build()
+//        mGoogleSignInClient = GoogleSignIn.getClient(activity as Activity, gso)
+//
+//        // Check if the user is already signed in
+//        if (firebaseAuth?.currentUser != null) {
+//            toggleViewVisibilityListener?.onToggleViewVisibility(true)
+//        }else{
+//            // Call the callback method to toggle view visibility
+//            toggleViewVisibilityListener?.onToggleViewVisibility(false) // Pass your desired visibility status here
+//        }
     }
 
     override fun onCreateView(
@@ -91,57 +92,57 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        btGoogleSignIn = view.findViewById(R.id.btGoogleLogin)
-        btGoogleSignIn.setOnClickListener { startSignInProcess() }
+//        btGoogleSignIn = view.findViewById(R.id.btGoogleLogin)
+//        btGoogleSignIn.setOnClickListener { startSignInProcess() }
         return view
     }
 
-    private fun startSignInProcess()
-    {
-        val intent = mGoogleSignInClient?.signInIntent
-        startActivityForResult(intent, RC_SIGN_IN)
+//    private fun startSignInProcess()
+//    {
+//        val intent = mGoogleSignInClient?.signInIntent
+//        startActivityForResult(intent, RC_SIGN_IN)
+//
+//    }
 
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RC_SIGN_IN) {
-            if (resultCode == Activity.RESULT_OK) {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-                try {
-                    // Google Sign-In was successful, authenticate with Firebase
-                    val account = task.getResult(ApiException::class.java)
-                    firebaseAuthWithGoogle(account)
-                } catch (e: ApiException) {
-                    // Google Sign-In failed, handle the error
-                    Snackbar.make(
-                        btGoogleSignIn,
-                        "Login failed: ${e.message}",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
-            }
-        }
-    }
+//    @Deprecated("Deprecated in Java")
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == RC_SIGN_IN) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+//                try {
+//                    // Google Sign-In was successful, authenticate with Firebase
+//                    val account = task.getResult(ApiException::class.java)
+//                    firebaseAuthWithGoogle(account)
+//                } catch (e: ApiException) {
+//                    // Google Sign-In failed, handle the error
+//                    Snackbar.make(
+//                        btGoogleSignIn,
+//                        "Login failed: ${e.message}",
+//                        Snackbar.LENGTH_LONG
+//                    ).show()
+//                }
+//            }
+//        }
+//    }
 
     fun setOnToggleViewVisibilityListener(listener: OnToggleViewVisibilityListener) {
         toggleViewVisibilityListener = listener
     }
-
-    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount?) {
-        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
-        firebaseAuth?.signInWithCredential(credential)
-            ?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-//                    val user = firebaseAuth?.currentUser
-                    toggleViewVisibilityListener?.onToggleViewVisibility(true)
-                } else {
-                    Snackbar.make(btGoogleSignIn, "Firebase Authentication failed", Snackbar.LENGTH_LONG).show()
-                }
-            }
-    }
+//
+//    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount?) {
+//        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+//        firebaseAuth?.signInWithCredential(credential)
+//            ?.addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+////                    val user = firebaseAuth?.currentUser
+//                    toggleViewVisibilityListener?.onToggleViewVisibility(true)
+//                } else {
+//                    Snackbar.make(btGoogleSignIn, "Firebase Authentication failed", Snackbar.LENGTH_LONG).show()
+//                }
+//            }
+//    }
 
     companion object {
         /**
